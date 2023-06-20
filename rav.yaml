@@ -33,6 +33,7 @@ scripts:
 
   docker-build:
     - rav run clear
+    - rav run install
     - cp .env.server ./src/server/.env
     - docker compose run server python manage.py makemigrations
     - docker compose run server python manage.py migrate
