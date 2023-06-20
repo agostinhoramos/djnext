@@ -19,9 +19,20 @@ scripts:
     - cd src/server && python manage.py runserver
   client:
     - cd src/client && npm run dev
+  build:
+    - rav run install
+    - rav run migrate
+  
+  dev:
+    - cd src/server && python manage.py runserver
+    - cd src/client && npm run dev
+
+  prd:
+    - cd src/server && python manage.py runserver
+    - cd src/client && npm run start
+
   docker-build:
     - rav run clear
-    - rav run install
     - cp .env.server ./src/server/.env
     - docker compose run server python manage.py makemigrations
     - docker compose run server python manage.py migrate
