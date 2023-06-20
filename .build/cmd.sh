@@ -14,6 +14,5 @@ env/bin/python -m pip install pip pip-tools rav --upgrade
 env/bin/rav run install
 rav run freeze
 
-
 # Get start
 rav run server

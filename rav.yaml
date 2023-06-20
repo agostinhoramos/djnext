@@ -40,11 +40,13 @@ scripts:
     - cp .env.client ./src/client/.env
 
   docker-dev-up:
+    - rav run docker-dev-down
     - docker-compose -f docker-compose-dev.yml up --build
   docker-dev-down:
     - docker-compose -f docker-compose-dev.yml down
 
   docker-up:
+    - rav run docker-down
     - docker-compose -f docker-compose.yml up --build
   docker-down:
     - docker-compose -f docker-compose.yml down
