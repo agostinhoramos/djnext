@@ -1,0 +1,38 @@
+scripts:
+  install:
+    - env/bin/pip-compile src/server/requirements/requirements.in -o src/server/requirements.txt
+    - env/bin/python -m pip install -r src/server/requirements.txt
+    - env/bin/pip-compile src/server/requirements/requirements-dev.in -o src/server/requirements-dev.txt
+    - env/bin/python -m pip install -r src/server/requirements-dev.txt
+    - cd src/client && npm install
+  migrate: 
+    - cd src/server && python manage.py migrate
+  freeze:
+    - env/bin/python -m pip freeze
+  clear:
+    - rm -rf src/server/requirements*.txt
+    - rm -rf src/server/db.sqlite3
+    - rm -rf src/server/.env
+    - rm -rf src/client/node_modules
+    - rm -rf src/client/package-lock.json
+  server: 
+    - cd src/server && python manage.py runserver
+  client:
+    - cd src/client && npm run dev
+  docker-build:
+    - rav run clear
+    - rav run install
+    - cp .env.server ./src/server/.env
+    - docker compose run server python manage.py makemigrations
+    - docker compose run server python manage.py migrate
+    - cp .env.client ./src/client/.env
+
+  docker-dev-up:
+    - docker-compose -f docker-compose-dev.yml up --build
+  docker-dev-down:
+    - docker-compose -f docker-compose-dev.yml down
+
+  docker-up:
+    - docker-compose -f docker-compose.yml up --build
+  docker-down:
+    - docker-compose -f docker-compose.yml down

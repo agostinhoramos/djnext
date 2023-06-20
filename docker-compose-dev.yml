@@ -1,0 +1,65 @@
+version: '3.3'
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=speedpycom
+      - POSTGRES_PASSWORD=speedpycom
+      - POSTGRES_DB=speedpycom
+    ports:
+      - "21003:5432"
+
+  server:
+    build: ./src/server
+    hostname: server
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - ./src/server/.env
+    volumes:
+      - ./src/server:/server
+    links:
+      - db
+      - redis
+    depends_on:
+      - db
+      - redis
+
+  client:
+    build: ./src/client
+    hostname: client
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    working_dir: /client
+    volumes:
+      - ./src/client:/client
+    env_file:
+      - ./src/client/.env
+    command: >
+      sh -c "npm install -g npm@latest && npm install && npm run dev"
+    depends_on:
+      - server
+
+  web:
+    hostname: web
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: ./src/web/Dockerfile
+    ports:
+      - '6443:443'
+      - '6080:80'
+    depends_on:
+      - server
+      - client
