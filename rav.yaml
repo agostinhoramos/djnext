@@ -15,6 +15,7 @@ scripts:
     - rm -rf src/server/.env
     - rm -rf src/client/node_modules
     - rm -rf src/client/package-lock.json
+    - sudo rm -rf src/client/.next
   server: 
     - cd src/server && python manage.py runserver
   client:
