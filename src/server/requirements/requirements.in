@@ -31,3 +31,5 @@ pytz
 requests
 sentry-sdk
 whitenoise
+djoser
+django-jazzmin

@@ -5,12 +5,12 @@ services:
     ports:
       - "6379:6379"
 
-  db:
+  dbhost:
     image: postgres
     environment:
-      - POSTGRES_USER=speedpycom
-      - POSTGRES_PASSWORD=speedpycom
-      - POSTGRES_DB=speedpycom
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
     ports:
       - "21003:5432"
 
@@ -21,16 +21,16 @@ services:
     stdin_open: true
     tty: true
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "sleep 15 && python manage.py runserver 0.0.0.0:8000"
     env_file:
       - ./src/server/.env
     volumes:
       - ./src/server:/server
     links:
-      - db
+      - dbhost
       - redis
     depends_on:
-      - db
+      - dbhost
       - redis
 
   client:

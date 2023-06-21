@@ -3,6 +3,7 @@
 
 ### Djnext ####
 ssl/*
+src/server/static
 
 ### Django ###
 *.log
