@@ -21,8 +21,11 @@ urlpatterns = [
     path('_api/', include('coreapp.urls')),
 ]
 
+from coreapp.admin import admin_site
+
 urlpatterns += [
     # Admin endpoint
+    #path('dn-admin/', admin_site.urls),
     path('dn-admin/', admin.site.urls),
     # Auth endpoints
 ]

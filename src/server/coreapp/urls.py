@@ -9,5 +9,5 @@ from django.conf.urls.static import static
 from coreapp.views import *
 
 urlpatterns = [
-
+    
 ]
