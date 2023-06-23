@@ -1,7 +1,9 @@
-from rest_framework import serializers
-from .models import EntityUser
+from djoser.serializers import UserCreateSerializer, UserSerializer
+from djoser.conf import settings as djoser_settings
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EntityUser
-        fields = ['id', 'email', 'first_name', 'last_name', 'password', 'auth_provider', 'default_lang', 'is_active', 'is_email_confirmed', 'date_joined', 'changed_at', ]
+class UserCreateSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name', 'password')

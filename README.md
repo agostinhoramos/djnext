@@ -15,13 +15,13 @@ To get a local copy of this template up and running on your machine, follow thes
 - Create virtual env `python3 -m venv env && source env/bin/activate && env/bin/python -m pip install pip pip-tools rav --upgrade`
 
     #### with Docker
-    - Load Rav `source env/bin/activate`
+    - Activate virtual env `source env/bin/activate`
     - Build Project `rav run docker-build`
     - Start Project `rav run docker-dev-up` or `rav run docker-up`
     - Stop Project `rav run docker-dev-down` or `rav run docker-down`
 
     #### without Docker
-    - Load Rav `source env/bin/activate`
+    - Activate virtual env `source env/bin/activate`
     - Build Project `rav run build`
     - Start Project `rav run dev-up` or `rav run prd-up`
     - Start Project `rav run dev-down` or `rav run prd-down`

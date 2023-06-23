@@ -33,3 +33,17 @@ sentry-sdk
 whitenoise
 djoser
 django-jazzmin
+asgiref
+certifi
+cffi
+chardet
+cryptography
+defusedxml
+django-templated-mail
+idna
+oauthlib
+PyJWT
+six
+social-auth-app-django
+social-auth-core
+urllib3

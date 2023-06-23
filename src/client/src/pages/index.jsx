@@ -1,9 +1,14 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
+import { useContext } from 'react';
+import AuthContext from '@/context/AuthContext'
+
 const Index = () => {
+
+  const { isLoggedIn, userData, logout } = useContext(AuthContext)
+  
 
   return (
     <>
@@ -20,15 +25,19 @@ const Index = () => {
           <code className="font-mono font-bold">src/client/src/pages/index.jsx</code>
         </p>
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <Link
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href={"https://github.com/agostinhoramos"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <div className='font-semibold' >Agostinho Ramos</div>
-          </Link>
+          
+          { isLoggedIn ?
+            <div className="cursor-pointer flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0 text-2xl" >
+              <div className='font-semibold' onClick={()=>{logout()}} >{ `Hey, ${userData?.first_name}` }</div>
+            </div>
+          :
+            <Link
+              className="cursor-pointer flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0 text-2xl hover:underline"
+              href={"/login"}
+            >
+              <div className='font-semibold' >Login</div>
+            </Link>
+          }
         </div>
       </div>
 
@@ -50,7 +59,24 @@ const Index = () => {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
+            Find in-depth information about DjNext features and API.
+          </p>
+        </Link>
+
+        <Link
+          href="/technologies"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Used technologies{' '}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+          By itself, Next.js offers great options for writing lambda functions to power the backend of your application
           </p>
         </Link>
 
@@ -67,7 +93,7 @@ const Index = () => {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
+          An admin panel enables administrators of a website to manage its configurations, settings, content, and features.
           </p>
         </Link>
       </div>

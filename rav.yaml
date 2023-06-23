@@ -12,6 +12,8 @@ scripts:
   clear:
     - rm -rf src/server/requirements*.txt
     - rm -rf src/server/db.sqlite3
+    - rm -rf src/server/coreapp/migrations/*_initial.py
+    - rm -rf src/server/coreapp/migrations/*_alter_*.py
     - rm -rf src/server/.env
     - rm -rf src/client/node_modules
     - rm -rf src/client/package-lock.json

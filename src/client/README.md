@@ -11,6 +11,9 @@ yarn dev
 # or
 pnpm dev
 ```
+# Try to fix it
+- npm audit fix --force
+- npm audit
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
